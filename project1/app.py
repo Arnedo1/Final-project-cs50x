@@ -282,4 +282,4 @@ def get_conversion_rate(from_currency, to_currency, amount):
     return None
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
