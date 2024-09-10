@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link href="/static/favicon.ico" rel="icon">
+
+    <!-- Custom CSS -->
+    <link href="/static/styles.css" rel="stylesheet">
+
+    <style>
+        .small-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .currency-info {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .value {
+            font-style: italic;
+            color: #666;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .edit-currency {
+            width: 80px;
+            display: none;
+        }
+    </style>
+
+    <title>ARNEDO Currency Calculator - Home</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light border">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <span class="text-danger fw-bold">ARNEDO </span>
+                <span class="text-success fw-bold">Currency</span>
+                <span class="text-danger fw-bold">Calculator</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav ms-auto mt-2">
+                    <li class="nav-item">
+                        <span class="navbar-text me-4 fw-bold" style="color: green; font-size: 1.4em; text-transform: capitalize; position: relative; top: 3px;">
+                            {{ username }}
+                        </span>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="parent-container p-4">
+        <!-- Display base favorite currencies -->
+        {% for currency in base_favorites %}
+        <div class="small-container mb-3" data-currency="{{ currency }}">
+            <div class="currency-info">
+                {{ currency_flags_and_symbols[currency][0] }} {{ currency }}
+            </div>
+            <div class="value" data-currency="{{ currency }}">
+                <span class="currency-symbol">{{ currency_values.get(currency, ('N/A', ''))[1] }}</span>
+                <span class="currency-rate">{{ currency_values.get(currency, ('N/A', ''))[0] }}</span>
+                <input type="number" class="edit-currency" value="{{ currency_values.get(currency, ('', 0))[0] }}" step="0.01" min="0">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const containers = document.querySelectorAll('.small-container');
+
+    containers.forEach(container => {
+        const valueContainer = container.querySelector('.value');
+        const currencyRate = container.querySelector('.currency-rate');
+        const inputField = container.querySelector('.edit-currency');
+
+        valueContainer.addEventListener('click', function() {
+            currencyRate.style.display = 'none';
+            inputField.style.display = 'inline';
+            inputField.focus();
+        });
+
+        inputField.addEventListener('blur', updateCurrencyRates);
+        inputField.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                inputField.blur();
+            }
+        });
+
+        function updateCurrencyRates() {
+            const newValue = parseFloat(inputField.value);
+            console.log(`Input value: ${newValue}`);
+
+            if (!isNaN(newValue)) {
+                fetch('/update_currency', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ currency: valueContainer.dataset.currency, new_value: newValue })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Response data:", data);
+
+                    if (data.success) {
+                        data.updatedValues.forEach(update => {
+                            const containerToUpdate = document.querySelector(`.small-container[data-currency="${update.currency}"]`);
+                            if (containerToUpdate) {
+                                const updatedCurrencyRate = containerToUpdate.querySelector('.currency-rate');
+                                updatedCurrencyRate.textContent = update.new_rate.toFixed(2);
+
+                                const updatedInputField = containerToUpdate.querySelector('.edit-currency');
+                                updatedInputField.value = update.new_rate.toFixed(2);
+                            }
+                        });
+
+                        currencyRate.style.display = 'inline';
+                        inputField.style.display = 'none';
+                    } else {
+                        alert("Update failed: " + data.message);
+                        inputField.style.display = 'none';
+                        currencyRate.style.display = 'inline';
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    alert("Error updating currency.");
+                    inputField.style.display = 'none';
+                    currencyRate.style.display = 'inline';
+                });
+            } else {
+                console.log("Invalid input, non-numeric.");
+                currencyRate.style.display = 'inline';
+                inputField.style.display = 'none';
+            }
+        }
+    });
+});
+
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

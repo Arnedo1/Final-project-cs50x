@@ -1,0 +1,53 @@
+body {
+    background-color: lightblue;
+
+.parent-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px; /* Adjust this value to move it lower */
+        }
+        .small-container {
+            width: 400px;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            border: 1px solid gray;
+            transition: border-color 0.3s ease; /* Smooth transition effect */
+            .small-container
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px; /* Set a fixed height suitable for your design */
+            overflow: hidden; /* Ensures anything that exceeds the height does not affect layout */
+
+        }
+
+            .button-container {
+            display: flex;
+            gap: 100px;
+            justify-content: center; /* Center the buttons horizontally */
+            margin-top: 10px; /* Adjust as needed */
+            width: 100%; /* Full width of the parent container */
+        }
+
+            .small-container {
+            display: flex;
+            justify-content: space-between; /* Distribute items evenly */
+            align-items: center; /* Align items vertically in the center */
+                /* ... other styles for the container ... */
+            }
+
+            .currency-info {
+            font-weight: bold;
+            margin-right: 10px;
+            }
+
+            .value {
+            font-style: italic;
+            color: black;
+            }

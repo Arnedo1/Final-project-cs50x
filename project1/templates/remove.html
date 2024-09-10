@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link href="/static/favicon.ico" rel="icon">
+
+    <!-- Custom CSS -->
+    <link href="/static/styles.css" rel="stylesheet">
+
+    <style>
+        .small-container:hover {
+            outline: 2px solid red; /* Outline on hover */
+            cursor: pointer;
+        }
+
+        .small-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .currency-info {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .value {
+            font-style: italic;
+            color: #666;
+            margin-left: 5px;
+        }
+    </style>
+
+    <title>ARNEDO Currency Calculator - Remove Currency</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light border">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/favorites"> <!-- Redirects to favorites page -->
+                <span class="text-danger fw-bold">ARNEDO </span>
+                <span class="text-success fw-bold">Currency</span>
+                <span class="text-danger fw-bold">Calculator</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav ms-auto mt-2">
+                    <li class="nav-item">
+                        <span class="navbar-text me-4 fw-bold" style="color: green; font-size: 1.4em; text-transform: capitalize; position: relative; top: 3px;">
+                            {{ username }}
+                        </span>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="parent-container p-4">
+        <!-- Display favorite currencies -->
+        {% for currency in favorites %}
+        <div class="small-container mb-3" data-currency="{{ currency }}">
+            <div class="currency-info">
+              {{ currency_flags_and_symbols[currency][0] }} {{ currency }}
+            </div>
+            <div class="value">
+              {% if currency in currency_values %}
+                {{ currency_values[currency][1] }} {{ currency_values[currency][0] }}
+              {% else %}
+                N/A
+              {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="button-container">
+            <button class="btn btn-secondary" disabled>Remove currency</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const containers = document.querySelectorAll('.small-container');
+            containers.forEach(container => {
+                container.addEventListener('click', () => {
+                    const currency = container.getAttribute('data-currency');
+                    // Send a POST request to remove the currency
+                    fetch('/remove_currency', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ currency: currency })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Check if the removal was successful
+                        if (data.success) {
+                            window.location.href = '/favorites'; // Redirect to the favorites page
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+                });
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
