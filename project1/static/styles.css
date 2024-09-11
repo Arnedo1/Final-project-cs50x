@@ -56,7 +56,7 @@ body {
 /* Media query for small screens */
 @media (max-width: 576px) {
     .parent-container {
-        padding: 0 15px; /* Adds padding on the left and right */
+        padding: 0 50px; /* Adds padding on the left and right */
     }
 }
 
