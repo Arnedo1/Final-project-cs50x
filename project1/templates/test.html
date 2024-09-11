@@ -14,43 +14,28 @@
     <link href="/static/styles.css" rel="stylesheet">
 
     <style>
-        .parent-container {
-            padding: 15px;
-        }
         .small-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
+            margin-bottom: 10px;
         }
+
         .currency-info {
             font-weight: bold;
             margin-right: 10px;
         }
+
         .value {
             font-style: italic;
             color: #666;
             margin-left: 5px;
             cursor: pointer;
         }
+
         .edit-currency {
             width: 80px;
             display: none;
-        }
-        @media (max-width: 576px) {
-            .parent-container {
-                padding: 10px;
-            }
-            .small-container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .value {
-                margin-top: 5px;
-            }
         }
     </style>
 
@@ -97,13 +82,9 @@
         {% endfor %}
     </div>
 
-    <div class="container-fluid mt-4 mb-4">
-        <div class="row">
-            <div class="col-12 text-center">
-                <a href="/add_currency" class="btn btn-danger me-2">Add currency</a>
-                <a href="/remove_currency" class="btn btn-secondary">Remove currency</a>
-            </div>
-        </div>
+    <div class="button-container my-4">
+        <a href="/add_currency" class="btn btn-danger">Add currency</a>
+        <a href="/remove_currency" class="btn btn-secondary">Remove currency</a>
     </div>
 
     <!-- Bootstrap JS -->
@@ -166,4 +147,3 @@
 
 </body>
 </html>
-
