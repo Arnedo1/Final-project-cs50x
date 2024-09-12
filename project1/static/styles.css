@@ -13,19 +13,19 @@ body {
 .small-container {
     width: 400px;
     padding: 20px;
-    margin: 20 20px;
-    border: 1px solid #ccc;
+    margin: 0; /* Remove margin to rely on flex gap for spacing */
+    border: 1px solid gray;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
-    border: 1px solid gray;
-    transition: border-color 0.3s ease; /* Smooth transition effect */
+    transition: border-color 0.3s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px; /* Set a fixed height suitable for your design */
-    overflow: hidden; /* Ensure anything that exceeds the height does not affect layout */
+    height: 60px;
+    overflow: hidden;
 }
+
 
 .button-container {
     display: flex;
@@ -54,12 +54,13 @@ body {
 }
 
 /* Media query for small screens */
-@media (max-width: 576px) {
+@media (max-width: 428px) { /* iPhone 13 Pro width */
     .parent-container {
-        padding: 0 50px; /* Adds padding on the left and right */
+        padding: 0 15px; /* Adds 15px padding on the left and right */
+    }
+
+    .small-container {
+        width: 100%; /* Makes the container take up full width of the parent */
+        max-width: 360px; /* Ensures it doesn't get too wide on slightly larger screens */
     }
 }
-       .value {
-            font-style: italic;
-            color: black;
-            }
