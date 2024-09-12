@@ -41,7 +41,6 @@ body {
 }
 
 .value {
-    font-style: italic;
     color: black; /* Set the color to black */
     margin-left: 5px;
     cursor: pointer;
