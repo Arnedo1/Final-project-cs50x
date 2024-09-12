@@ -14,19 +14,18 @@
     <link href="/static/styles.css" rel="stylesheet">
 
     <style>
-        .small-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
         .edit-currency {
             width: 80px;
             display: none;
         }
-    </style>
 
+        .small-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+    </style>
     <title>ARNEDO Currency Calculator - Favorites</title>
 </head>
 <body>
@@ -70,14 +69,14 @@
         {% endfor %}
     </div>
 
-   <div class="container-fluid mt-4 mb-4">
-    <div class="row">
-        <div class="col-12 text-center">
-            <a href="/add_currency" class="btn btn-danger me-2">Add currency</a>
-            <a href="/remove_currency" class="btn btn-secondary">Remove currency</a>
+    <div class="container-fluid mt-4 mb-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="/add_currency" class="btn btn-danger me-2">Add currency</a>
+                <a href="/remove_currency" class="btn btn-secondary">Remove currency</a>
+            </div>
         </div>
     </div>
-</div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -139,4 +138,3 @@
 
 </body>
 </html>
-
