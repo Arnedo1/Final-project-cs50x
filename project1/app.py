@@ -28,7 +28,7 @@ base_currency = 'USD'
 base_amount = 1
 
 # API key
-API_KEY = 'd6356125405f6886b3a40b5f'
+API_KEY = 'xxx'
 
 @app.route("/")
 def index():
