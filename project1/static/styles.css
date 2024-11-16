@@ -16,6 +16,12 @@ body {
     margin-top: 100px;
 }
 
+.own {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+}
+
 .small-container {
     width: 400px;
     padding: 20px;
