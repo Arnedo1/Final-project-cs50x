@@ -1,5 +1,11 @@
 body {
-    background-color: lightblue;
+    background-image: url('/static/walstreet.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    min-height: 100vh;
 }
 
 .parent-container {
@@ -7,13 +13,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 100px; /* Adjusts the vertical position */
+    margin-top: 100px;
 }
 
 .small-container {
     width: 400px;
     padding: 20px;
-    margin: 0; /* Remove margin to rely on flex gap for spacing */
+    margin: 0;
     border: 1px solid gray;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -26,13 +32,12 @@ body {
     overflow: hidden;
 }
 
-
 .button-container {
     display: flex;
     gap: 100px;
-    justify-content: center; /* Center the buttons horizontally */
-    margin-top: 10px; /* Adjust as needed */
-    width: 100%; /* Full width of the parent container */
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
 }
 
 .currency-info {
@@ -41,25 +46,24 @@ body {
 }
 
 .value {
-    color: black; /* Set the color to black */
+    color: black;
     margin-left: 5px;
     cursor: pointer;
 }
 
-/* You may also want to ensure that individual spans or other elements inside .value are black */
 .value .currency-symbol,
 .value .currency-rate {
-    color: black; /* Ensure child elements are also set to black if they were individually styled */
+    color: black;
 }
 
 /* Media query for small screens */
-@media (max-width: 428px) { /* iPhone 13 Pro width */
+@media (max-width: 428px) {
     .parent-container {
-        padding: 0 15px; /* Adds 15px padding on the left and right */
+        padding: 0 15px;
     }
 
     .small-container {
-        width: 100%; /* Makes the container take up full width of the parent */
-        max-width: 360px; /* Ensures it doesn't get too wide on slightly larger screens */
+        width: 100%;
+        max-width: 360px;
     }
 }
