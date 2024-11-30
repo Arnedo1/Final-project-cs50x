@@ -1,8 +1,8 @@
 html, body {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    height: auto;
+    height: 100vh; /* Fixed viewport height */
+    overflow: hidden; /* Prevents scrolling beyond viewport */
 }
 
 body {
@@ -12,8 +12,6 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     width: 100%;
-    position: relative;
-    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -21,11 +19,11 @@ body {
 .parent-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    margin-top: 100px;
-    flex: 1;
-    min-height: calc(100vh - 100px); /* Subtracting margin-top */
+    padding-top: 100px;
+    height: calc(100vh - 100px); /* Constrain to viewport minus padding */
+    overflow-y: auto; /* Allow scrolling within container if needed */
 }
 
 .own {
