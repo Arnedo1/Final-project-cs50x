@@ -24,7 +24,7 @@ base_favorites = ['USD', 'BRL', 'EUR', 'CNY', 'GBP']
 conversion_rates = {}
 
 # Global variables to keep track of the base currency and amount
-base_currency = 'USD'
+base_currency = 'EUR'
 base_amount = 1
 
 # API key
