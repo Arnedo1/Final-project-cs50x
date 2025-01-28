@@ -18,7 +18,7 @@ Session(app)
 db = SQL("sqlite:///calculator.db")
 
 # Define the target currencies list
-base_favorites = ['USD', 'BRL', 'EUR', 'CNY', 'GBP']
+base_favorites = ['EUR', 'BRL', 'USD', 'CNY', 'GBP']
 
 # Dictionary to store conversion rates for quick access
 conversion_rates = {}
