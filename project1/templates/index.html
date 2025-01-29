@@ -12,7 +12,6 @@
         <link rel="manifest" href="static/favicon/site.webmanifest">
 
     <link href="/static/styles.css" rel="stylesheet">
-    <link href="/static/spinner10.css" rel="stylesheet">
     <style>
         .edit-currency {
             width: 80px;
@@ -85,18 +84,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 inputField.blur();
             }
         });
-        const block = () => {
-             document.querySelector('#spinner').style.display = 'block'
-        }
-
-        const none = () => {
-             document.querySelector('#spinner').style.display = 'none'
-        }        function updateCurrencyRates() {
+                function updateCurrencyRates() {
             const newValue = parseFloat(inputField.value);
             console.log(`Input value: ${newValue}`);
 
             if (!isNaN(newValue)) {
-                block()
+             
                 fetch('/update_currency', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -107,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.log("Response data:", data);
 
                     if (data.success) {
-                        none()
+                      
                         data.updatedValues.forEach(update => {
                             const containerToUpdate = document.querySelector(`.small-container[data-currency="${update.currency}"]`);
                             if (containerToUpdate) {
