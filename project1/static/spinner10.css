@@ -1,53 +1,46 @@
 .spinner {
-  --frame: 1s;
+    --frame: 1s;
+    display: none;
+    margin: 0 15px;
 }
+
 .spinner,
 .spinner::before,
 .spinner::after {
-  border: 5px solid white;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-}
-.spinner {
-  margin: auto;
-  font-size: 4em;
-  background-color: rgb(106, 106, 106);
-  width: 0.5em;
-  height: 0.5em;
-  -webkit-animation: anim-spinner var(--frame) ease infinite;
-  animation: anim-spinner var(--frame) ease infinite;
-display: none;
-}
-.spinner::before,
-.spinner::after {
-  content: '';
-  position: absolute;
-}
-.spinner::before {
-  inset: 1px;
-  -webkit-animation: anim-spinner calc(var(--frame) * 4.3) ease-in infinite;
-  animation: anim-spinner calc(var(--frame) * 4.3) ease-in infinite;
-}
-.spinner::after {
-  inset: 7px;
-  -webkit-animation: anim-spinner calc(var(--frame) * 1.51) ease-out infinite;
-  animation: anim-spinner calc(var(--frame) * 1.51) ease-out infinite;
+    border: 3px solid #dc3545;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
 }
 
-@-webkit-keyframes anim-spinner {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
+.spinner {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    animation: anim-spinner var(--frame) ease infinite;
 }
+
+.spinner::before,
+.spinner::after {
+    content: '';
+    position: absolute;
+}
+
+.spinner::before {
+    inset: 1px;
+    animation: anim-spinner calc(var(--frame) * 4.3) ease-in infinite;
+}
+
+.spinner::after {
+    inset: 4px;
+    animation: anim-spinner calc(var(--frame) * 1.51) ease-out infinite;
+}
+
 @keyframes anim-spinner {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
 }
