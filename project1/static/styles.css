@@ -1,0 +1,88 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Fixed viewport height */
+    overflow: hidden; /* Prevents scrolling beyond viewport */
+}
+
+body {
+    background-image: url('/static/walstreet.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.navbar-toggler:focus,
+.navbar-toggler:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.parent-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 100px;
+    overflow-y: auto; /* Allow scrolling within container if needed */
+}
+
+.own {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+}
+
+.small-container {
+    width: 400px;
+    padding: 20px;
+    margin: 0;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    overflow: hidden;
+}
+
+.button-container {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    width: 100%;
+}
+
+.currency-info {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.value {
+    color: black;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.value .currency-symbol,
+.value .currency-rate {
+    color: black;
+}
+
+/* Media query for small screens */
+@media (max-width: 428px) {
+    .parent-container {
+        padding: 0 15px;
+    }
+
+    .small-container {
+        width: 100%;
+        max-width: 360px;
+    }
+}
